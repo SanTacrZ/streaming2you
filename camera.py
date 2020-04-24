@@ -2,21 +2,21 @@ import cv2
 
 class VideoCamera(object):
     def __init__(self):
-        # Using OpenCV to capture from device 0. If you have trouble capturing
-        # from a webcam, comment the line below out and use a video file
-        # instead.
+        # Uso de OpenCV para capturar desde el dispositivo 0. Si tiene problemas para capturar
+        # desde una cámara web, comente la línea a continuación y use un archivo de video
+        # en su lugar.
         self.video = cv2.VideoCapture(0)
-        # If you decide to use video.mp4, you must have this file in the folder
-        # as the main.py.
-        # self.video = cv2.VideoCapture('video.mp4')
+        # Si decide usar video.mp4, debe tener este archivo en la carpeta
+        # Como la main.py.
+        # self.video = cv2.VideoCapture ('video.mp4')
     
     def __del__(self):
         self.video.release()
     
     def get_frame(self):
         success, image = self.video.read()
-        # We are using Motion JPEG, but OpenCV defaults to capture raw images,
-        # so we must encode it into JPEG in order to correctly display the
-        # video stream.
+        # Estamos usando Motion JPEG, pero OpenCV está predeterminado para capturar imágenes en bruto,
+        # por lo que debemos codificarlo en JPEG para mostrar correctamente el
+        # Video en directo.
         ret, jpeg = cv2.imencode('.jpg', image)
         return jpeg.tobytes()
